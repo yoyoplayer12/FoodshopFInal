@@ -1,5 +1,6 @@
 // import React, { useState, useEffect } from 'react';
 import { StyleSheet, Text, View, FlatList, TextInput } from 'react-native';
+import HtmlView from 'react-native-htmlview/HTMLView';
 import apiKey from '../apiKey';
 
 
@@ -12,7 +13,7 @@ const FoodItem = ({ title, content }) => {
     return(
         <View style={styles.post}>
             <Text style={styles.title}>{title}</Text>
-            <Text style={styles.content}>{content}</Text>
+            <HtmlView value={content} />
         </View>
     )
 }
