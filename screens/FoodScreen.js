@@ -1,5 +1,5 @@
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View, VirtualizedList, SafeAreaView } from 'react-native';
+import { StyleSheet, Text, View, VirtualizedList, FlatList, SafeAreaView } from 'react-native';
 import React, { useState, useEffect } from 'react';
 import apiKey from '../apiKey';
 import FoodItem from '../components/FoodItem';
@@ -52,7 +52,6 @@ const getItemCount = (data) => data.length;
       useEffect(() => {
         getFoodsByDefault();//laad foods wanneer het scherm laadt
       }, []);
-
       while (titleNum < foodInfo.length && contentNum < foodInfo.length){
         return (
           <SafeAreaView style={styles.container}>
