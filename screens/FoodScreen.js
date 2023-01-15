@@ -1,15 +1,15 @@
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View, VirtualizedList, FlatList, SafeAreaView } from 'react-native';
+import { StyleSheet, Text, View, VirtualizedList, SafeAreaView } from 'react-native';
 import React, { useState, useEffect } from 'react';
 import apiKey from '../apiKey';
 import FoodItem from '../components/FoodItem';
 
-const Post = "https://yorickdv.be/wp-json/wp/v2/posts/"
 let PostNum = -1
 const foodInfo = [
 ]
 let titleNum = 0
 let contentNum = 0
+let categoryNum = 0
 
 const FoodScreen = navigation =>{
 
@@ -18,7 +18,7 @@ const getItem = (data, index) => ({
   title: `Item ${index+1}`
 });
   
-const getItemCount = (data) => data.length;
+const getItemCount = (data) => data.length;                   //getting number of foods
   
 
 //api ophalen info
@@ -26,7 +26,7 @@ const getItemCount = (data) => data.length;
     const getFoodsByDefault = async () => {
         //getting title
         try {
-          const response = await fetch(Post, {
+          const response = await fetch(apiKey + "&order=asc&orderby=title", {
             "method": "GET",
             "headers": {
               "x-rapidapi-host": "food144.p.rapidapi.com",
@@ -52,7 +52,8 @@ const getItemCount = (data) => data.length;
       useEffect(() => {
         getFoodsByDefault();//laad foods wanneer het scherm laadt
       }, []);
-      while (titleNum < foodInfo.length && contentNum < foodInfo.length){
+
+      while (titleNum < foodInfo.length && contentNum < foodInfo.length && categoryNum < foodInfo.length){
         return (
           <SafeAreaView style={styles.container}>
             <VirtualizedList
@@ -81,12 +82,17 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: '#fff',
   },
-  input: {
-    
-  }
 });
 
 export default FoodScreen;
+
+
+
+
+
+
+
+
 
 
 

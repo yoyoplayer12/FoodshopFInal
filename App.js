@@ -14,6 +14,7 @@ export default function App() {
     <NavigationContainer>
       <Stack.Navigator>
         <Stack.Screen name="The FoodShop 🍔" component={FoodScreen} />
+        {/* <Stack.Screen name="Details" component={DetailScreen} /> */}
       </Stack.Navigator>
     </NavigationContainer>
   );
