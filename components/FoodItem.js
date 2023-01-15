@@ -1,53 +1,61 @@
-// import React, { useState, useEffect } from 'react';
-import { StyleSheet, Text, View, Image, Button } from 'react-native';
-import apiKey from '../apiKey';
+import React, { useState, useEffect } from 'react';
+import { StyleSheet, Text, View, Image, Button, TouchableOpacity } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
 
 
 // content.match[3] = image ==> gaat maar tot 4
 
 
-const FoodItem = ({ title, content }) => {
+const FoodItem = props => {
+  const navigation = useNavigation(); 
   //fixing img url
-  let urlWithClutter = content
+  let urlWithClutter = props.content
   let startUrl = urlWithClutter.indexOf("http");
   let endurl = urlWithClutter.indexOf(".jpg")
   let urlFull = urlWithClutter.substring(startUrl, endurl+4)
   //end fixing img url
-  //fixing content
-  let contentTextWithClutter = content;
-  let startContent = contentTextWithClutter.indexOf(">");
-  let endContent = contentTextWithClutter.indexOf("<br>");
-  let contentFull = contentTextWithClutter.substring(startContent+1, endContent);
-  //end fixing content
   //fixing category
-  let categoryWithClutter = content;
+  let categoryWithClutter = props.content;
   let startCategory = categoryWithClutter.indexOf("<br>");
   let endCategory = categoryWithClutter.lastIndexOf("<br>");
   let categoryFull = categoryWithClutter.substring(startCategory+4, endCategory);
   //end fixing category
   //fixing price
-  let priceWithClutter = content;
+  let priceWithClutter = props.content;
   let startPrice = priceWithClutter.lastIndexOf("<br>");
   let endPrice = priceWithClutter.lastIndexOf("</p>");
   let priceFull = priceWithClutter.substring(startPrice+21, endPrice);
   //end fixing price
+  const [itemCounters,setItemCounters] = useState([]);
 
   return(
+    <TouchableOpacity activeOpacity={0.5} onPress={() => props.onSelectFood(props.id)}>
       <View style={styles.post}>
-          <Text style={styles.title}>{title}</Text>
-          <Text style={styles.content}>{contentFull}</Text>
-          <Text style={styles.category}>{categoryFull}</Text>
-          <Text style={styles.price}>Price: {priceFull}</Text>
+          <Text style={styles.title}>{props.title}</Text>
+          <View style={styles.catPrice}>
+            <Text style={styles.infoItem}>{categoryFull}</Text>
+            <Text style={styles.infoItem}>Price: {priceFull}</Text>
+          </View>
+          
           <Image
             style={styles.image}
             source={{
               uri: urlFull
             }}
           />
-          <Button style={styles.buybutton} title='Add' ></Button>
+
+          <Button style={styles.buybutton} title='Add to cart' onPress={() => setItemCounters([...itemCounters,props.title])} />
+          <View style={styles.counterGroup}>
+              <Text style={styles.counterText}>{itemCounters.length}</Text>
+          </View>
       </View>
+    </TouchableOpacity>
   )
 }
+
+
+
+
 
 const styles = StyleSheet.create({
     title: {
@@ -55,32 +63,12 @@ const styles = StyleSheet.create({
       fontWeight: 'bold',
       marginLeft: '5%',
       marginTop: 20,
+      alignSelf: 'center',
     },
     post: {
-      backgroundColor: "rgb(219, 219, 219)",
-      marginTop: 10,
-      justifyContent: "center",
-      alignItems: 'center',
-      shadowColor: 'black',
-    },
-    content: {
-      maxWidth: '90%',
-      marginLeft: '5%',
-      marginBottom: 8,
-      marginTop: 20,
-      fontSize: 18,
-    },
-    category: {
-      maxWidth: '90%',
-      marginLeft: '5%',
-      marginBottom: 8,
-      fontSize: 18,
-    },
-    price: {
-      maxWidth: '90%',
-      marginLeft: '5%',
+      backgroundColor: "#f0f0f0",
       marginBottom: 20,
-      fontSize: 18,
+      justifyContent: "center",
     },
     image: {
       width: 300,
@@ -88,6 +76,36 @@ const styles = StyleSheet.create({
       overflow: "hidden",
       borderRadius: 10,
       marginBottom: 20,
+      alignSelf: 'center',
+    },
+    counterGroup: {
+      flexDirection: 'row',
+      alignSelf: 'center',
+      justifyContent: 'center',
+    },
+    counterText: {
+      alignSelf: 'center',
+      color:  'rgb(0,122,255)',
+      marginBottom: 20,
+      backgroundColor: 'white',
+      padding: 10,
+      width: 40,
+      height: 40,
+      borderRadius: 40 / 2,
+      overflow:'hidden',
+      textAlign: 'center',
+    },
+    catPrice: {
+      flexDirection: 'column',
+      alignSelf: 'left',
+      marginLeft: 25,
+      marginTop: 20,
+      marginBottom: 10,
+    },
+    infoItem: {
+      marginLeft: 40,
+      marginRight: 40,
+      fontSize: 18,
     },
   });
 export default FoodItem;

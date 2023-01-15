@@ -4,7 +4,8 @@ import { NavigationContainer } from '@react-navigation/native';                 
 import { createNativeStackNavigator } from '@react-navigation/native-stack';          //navigation
 
 import FoodScreen from './screens/FoodScreen.js';
-// import DetailScreen from './screens/DetailScreen.js';
+import DetailScreen from './screens/DetailScreen.js';
+import SortScreen from './screens/SortScreen.js';
 // import ShoppingBasketScreen from './screens/ShoppingbasketScreen.js';
 
 
@@ -13,8 +14,9 @@ export default function App() {
   return (
     <NavigationContainer>
       <Stack.Navigator>
-        <Stack.Screen name="The FoodShop 🍔" component={FoodScreen} />
-        {/* <Stack.Screen name="Details" component={DetailScreen} /> */}
+        <Stack.Screen name="FoodShop" component={FoodScreen} />
+        <Stack.Screen name="Details" component={DetailScreen} />
+        <Stack.Screen name="Sort" component={SortScreen} />
       </Stack.Navigator>
     </NavigationContainer>
   );

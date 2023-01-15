@@ -1,25 +1,26 @@
-import { StyleSheet, Text, View, VirtualizedList, SafeAreaView } from 'react-native';
+import React, { useState, useEffect } from 'react';
+import { StyleSheet, View, Button, Text } from 'react-native';
+
+import FoodDetails from '../components/FoodDetails';
+
+import {foodInfo} from '../screens/FoodScreen';
 
 
 
-
-
-const FoodScreen = navigation =>{
+const DetailScreen = ({route}) =>{
+  const { foodId } = route.params;
     return (
-        <View style={styles.screen}>
-          <MovieDetails movieId={movieId} />
-          <Button
-            title="Go to Movies"
-            onPress={() => navigation.navigate('Movies')}
-          />
-        </View>
+      <View style={styles.screen}>
+        <FoodDetails 
+        foodId={foodId}
+        />
+      </View>
       );
 }
 const styles = StyleSheet.create({
     screen: {
       flex: 1,
-      justifyContent: 'center',
-    }
+    },
   });
   
 export default DetailScreen;
