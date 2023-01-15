@@ -1,5 +1,5 @@
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View, VirtualizedList, SafeAreaView, TextInput, Button } from 'react-native';
+import { StyleSheet, Text, View, VirtualizedList, TextInput, Button } from 'react-native';
 import React, { useState, useEffect } from 'react';
 import apiKey from '../apiKey';
 import FoodItem from '../components/FoodItem';
@@ -55,11 +55,7 @@ const FoodScreen = ({ navigation }) => {
 
         while (titleNum < foodInfo.length && contentNum < foodInfo.length && idNum < foodInfo.length){
           return (
-            <SafeAreaView style={styles.container}>
-              <View styles={styles.SorCartButtons}>
-                <Button title="Sort" onPress={() => {navigation.navigate('Sort')}}></Button>
-                <Button title="Cart" onPress={() => console.log("Cart")}></Button>
-              </View>
+            <View style={styles.container}>
               <VirtualizedList
                 data={foodInfo}
                 initialNumToRender={20}
@@ -76,7 +72,7 @@ const FoodScreen = ({ navigation }) => {
                 getItemCount={getItemCount}
                 getItem={getItem}
               />
-            </SafeAreaView>
+            </View>
           );
         }
       }
@@ -84,13 +80,7 @@ const FoodScreen = ({ navigation }) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
-  },
-  SorCartButtons: {
-    flex: 1,
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'center',
+    backgroundColor: '#f29f63',
   },
 });
 

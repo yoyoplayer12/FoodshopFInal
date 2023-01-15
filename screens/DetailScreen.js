@@ -20,6 +20,7 @@ const DetailScreen = ({route}) =>{
 const styles = StyleSheet.create({
     screen: {
       flex: 1,
+      backgroundColor: '#f7c29c',
     },
   });
   

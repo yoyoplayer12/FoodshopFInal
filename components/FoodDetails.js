@@ -35,7 +35,7 @@ const FoodDetails = props => {
         let categoryWithClutter = Content;
         let startCategory = categoryWithClutter.indexOf("<br>");
         let endCategory = categoryWithClutter.lastIndexOf("<br>");
-        categoryFull = categoryWithClutter.substring(startCategory+4, endCategory);
+        categoryFull = categoryWithClutter.substring(startCategory+14, endCategory);
         //end fixing category
         //fixing price
         let priceWithClutter = Content;
@@ -73,11 +73,10 @@ const FoodDetails = props => {
     }, []);
 
     return (
-        console.log(shoppingBasket),
         <ScrollView>
             <Text style={styles.title}>{foodDetailsArray[0 + (foodDetailsArray.length-1)]}</Text>
             <View style={styles.catPrice}>
-                <Text style={styles.infoItem}>{categoryFull}</Text>
+                <Text style={styles.infoItem}>Course: {categoryFull}</Text>
                 <Text style={styles.infoItem}>{priceFull} </Text>
             </View>
             <Image
@@ -120,6 +119,7 @@ const styles = StyleSheet.create({
     alignSelf: 'center',
     marginTop: 20,
     fontSize: 50,
+    fontWeight: 'bold',
   },
   catPrice: {
     flexDirection: 'row',
@@ -137,7 +137,7 @@ const styles = StyleSheet.create({
     overflow: "hidden",
     borderRadius: 10,
     marginBottom: 20,
-    marginTop: 60,
+    marginTop: 40,
     alignSelf: 'center',
   },
   content: {
@@ -145,6 +145,8 @@ const styles = StyleSheet.create({
     alignSelf: 'center',
     fontSize: 18,
     marginTop: 20,
+    marginBottom: 40,
+    textAlign: 'center',
   },
 });
 export default FoodDetails;

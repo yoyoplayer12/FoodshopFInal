@@ -14,12 +14,6 @@ const FoodItem = props => {
   let endurl = urlWithClutter.indexOf(".jpg")
   let urlFull = urlWithClutter.substring(startUrl, endurl+4)
   //end fixing img url
-  //fixing category
-  let categoryWithClutter = props.content;
-  let startCategory = categoryWithClutter.indexOf("<br>");
-  let endCategory = categoryWithClutter.lastIndexOf("<br>");
-  let categoryFull = categoryWithClutter.substring(startCategory+4, endCategory);
-  //end fixing category
   //fixing price
   let priceWithClutter = props.content;
   let startPrice = priceWithClutter.lastIndexOf("<br>");
@@ -32,10 +26,7 @@ const FoodItem = props => {
     <TouchableOpacity activeOpacity={0.5} onPress={() => props.onSelectFood(props.id)}>
       <View style={styles.post}>
           <Text style={styles.title}>{props.title}</Text>
-          <View style={styles.catPrice}>
-            <Text style={styles.infoItem}>{categoryFull}</Text>
-            <Text style={styles.infoItem}>Price: {priceFull}</Text>
-          </View>
+
           
           <Image
             style={styles.image}
@@ -43,7 +34,9 @@ const FoodItem = props => {
               uri: urlFull
             }}
           />
-
+          <View style={styles.catPrice}>
+            <Text style={styles.infoItem}>Price: {priceFull}</Text>
+          </View>
           <Button style={styles.buybutton} title='Add to cart' onPress={() => setItemCounters([...itemCounters,props.title])} />
           <View style={styles.counterGroup}>
               <Text style={styles.counterText}>{itemCounters.length}</Text>
@@ -63,11 +56,13 @@ const styles = StyleSheet.create({
       fontWeight: 'bold',
       marginLeft: '5%',
       marginTop: 20,
+      marginBottom: 20,
       alignSelf: 'center',
     },
     post: {
-      backgroundColor: "#f0f0f0",
-      marginBottom: 20,
+      backgroundColor: "#f7c29c",
+      borderBottomColor: "white",
+      borderBottomWidth: 5,
       justifyContent: "center",
     },
     image: {
@@ -87,7 +82,7 @@ const styles = StyleSheet.create({
       alignSelf: 'center',
       color:  'rgb(0,122,255)',
       marginBottom: 20,
-      backgroundColor: 'white',
+      backgroundColor: '#f7dbc6',
       padding: 10,
       width: 40,
       height: 40,
@@ -99,7 +94,7 @@ const styles = StyleSheet.create({
       flexDirection: 'column',
       alignSelf: 'left',
       marginLeft: 25,
-      marginTop: 20,
+      marginTop: 10,
       marginBottom: 10,
     },
     infoItem: {
